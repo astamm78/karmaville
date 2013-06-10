@@ -13,34 +13,24 @@
 
 <div class="pagination">
   <ul>
-    <li><%= link_to "First", page_path(1) %></li>
+    <% if @page == 1 %><li class="disabled"><% else %><li><% end %>
+    <%= link_to "First", page_path(1) %></li>
+
+    <% (1..5).to_a.reverse.each do |i| %>
+    <% if @page - (i - 1) > 1 %>
+      <li><%= link_to (@page - i), page_path(@page - i)%></li>
+      <% end %>
+    <% end %>
+      
+    <li class="active"><%= link_to @page, page_path(@page) %></li>
     
-    <% if @page - 2 > ( 1 ) %>
-      <li><%= link_to (@page - 3), page_path(@page - 3) %></li>
+    <% 5.times do |i| %>
+    <% unless @page + (i + 1) >= @total_pages %>
+      <li><%= link_to (@page + (i + 1) ), page_path(@page + (i + 1) )%></li>
+      <% end %>
     <% end %>
     
-    <% if @page - 1 > ( 1 ) %>
-      <li><%= link_to (@page - 2), page_path(@page - 2) %></li>
-    <% end %>
-    
-    <% if @page > ( 1 ) %>
-      <li><%= link_to (@page - 1), page_path(@page - 1) %></li>
-    <% end %>
-    
-    <li><%= link_to @page, page_path(@page), :class => 'inactive' %></li>
-    
-    <% if @page < ( User.count / 50 ) %>
-      <li><%= link_to (@page + 1), page_path(@page + 1) %></li>
-    <% end %>
-    
-    <% if @page < ( (User.count / 50) - 1 ) %>
-      <li><%= link_to (@page + 2), page_path(@page + 2) %></li>
-    <% end %>
-    
-    <% if @page < ( (User.count / 50) - 2 ) %>
-      <li><%= link_to (@page + 3), page_path(@page + 3) %></li>
-    <% end %>
-    
-    <li><%= link_to "Last", page_path(User.count / 50) %></li>
+    <% if @page == (@total_pages) %><li class="disabled"><% else %><li><% end %>
+    <%= link_to "Last", page_path(@total_pages) %></li>
   </ul>
 </div>

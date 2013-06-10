@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   def index
+    @total_pages = (User.count / 50)
     if params[:page]
       @users = User.by_karma.page(params[:page])
       @page = params[:page].to_i
@@ -10,6 +11,7 @@ class UsersController < ApplicationController
   end
 
   def page
+    @total_pages = (User.count / 50)
     if params[:id]
       @users = User.by_karma.page(params[:id])
       @page = params[:id].to_i
