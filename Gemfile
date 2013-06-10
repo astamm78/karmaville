@@ -8,6 +8,7 @@ gem 'bcrypt-ruby'
 gem 'pg'
 gem 'jquery-rails'
 
+
 group :development do
   gem 'quiet_assets'
   gem 'activerecord-import'
@@ -19,6 +20,7 @@ group :development, :test do
 end
 
 group :test do
+  gem 'capybara'
   gem 'faker'
   gem 'factory_girl_rails'
   gem 'shoulda-matchers'

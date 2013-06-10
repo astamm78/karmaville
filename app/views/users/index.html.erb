@@ -10,3 +10,37 @@
     <%= render 'user_row', :user => user %>
   <% end %>
 </table>
+
+<div class="pagination">
+  <ul>
+    <li><%= link_to "First", page_path(1) %></li>
+    
+    <% if @page - 2 > ( 1 ) %>
+      <li><%= link_to (@page - 3), page_path(@page - 3) %></li>
+    <% end %>
+    
+    <% if @page - 1 > ( 1 ) %>
+      <li><%= link_to (@page - 2), page_path(@page - 2) %></li>
+    <% end %>
+    
+    <% if @page > ( 1 ) %>
+      <li><%= link_to (@page - 1), page_path(@page - 1) %></li>
+    <% end %>
+    
+    <li><%= link_to @page, page_path(@page), :class => 'inactive' %></li>
+    
+    <% if @page < ( User.count / 50 ) %>
+      <li><%= link_to (@page + 1), page_path(@page + 1) %></li>
+    <% end %>
+    
+    <% if @page < ( (User.count / 50) - 1 ) %>
+      <li><%= link_to (@page + 2), page_path(@page + 2) %></li>
+    <% end %>
+    
+    <% if @page < ( (User.count / 50) - 2 ) %>
+      <li><%= link_to (@page + 3), page_path(@page + 3) %></li>
+    <% end %>
+    
+    <li><%= link_to "Last", page_path(User.count / 50) %></li>
+  </ul>
+</div>
